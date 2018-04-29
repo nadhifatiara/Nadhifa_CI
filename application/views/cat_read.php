@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Nadhifa Tiara Putri</title>
+  <meta charset="UTF-8">
+  <title>Nadhifa Tiara Putri</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-	<nav class="navbar navbar-expand-md navbar-dark bg-primary text-dark mb-4">
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary text-dark mb-4">
       <a class="navbar-brand" href="#">Nadhifa's</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -36,24 +36,29 @@
     </nav>
 
     <main role="main" class="container">
-      <a href="<?php echo base_url("index.php/Blog/add_view") ?>" class="btn btn-primary">Tambah Blog</a>
-      <ul class="list-unstyled">
-  <?php foreach ($records as $key => $value): ?>
-    <li class="media">
-    <img class="mr-3" src="<?php echo base_url() ?>uploads/<?php echo $value['image_file'] ?>" alt="Generic placeholder image" width="100px" height="150px">
-    <div class="media-body">
-      <h5 class="mt-0 mb-1"><?php echo $value['title'] ?></h5>
-      <h6 class="text-muted"><?php echo $value['date'] ?></h6>
-      <?php echo $value['content'] ?>
-      <br>
-      <a href="<?php echo base_url('index.php/Blog/byId/'.$value['id']) ?>">View Details</a>
-      <a class="btn btn-sm btn-success" href="<?php echo base_url('index.php/Blog/update_view/'.$value['id']) ?>">Update  </a>
-      <a class="btn btn-sm btn-danger" href="<?php echo base_url('index.php/Blog/delete_action/'.$value['id']) ?>">Delete </a>
-    </div>
-  </li>
-  <?php endforeach ?>
-</ul>
-    </main>															
+    <a href="<?php echo base_url('index.php/category/create') ?>" class="btn btn-primary mb-3">Tambah</a>
+    <table class="table table-bordered">
+       <thead>
+         <th>#</th>
+         <th>Name</th>
+         <th>Description</th>
+         <th>Action</th>
+       </thead>
+       <tbody>
+         <?php foreach ($cat_read as $key => $value): ?>
+           <tr>
+              <td><?php echo $key+1 ?></td>
+              <td><?php echo $value['cat_name'] ?></td>
+              <td><?php echo $value['cat_description'] ?></td>
+              <td> <a href="<?php echo base_url('index.php/category/update/'.$value['cat_id']) ?>" class="btn btn-sm btn-success">Ubah</a>
+                  <a href="<?php echo base_url('index.php/category/delete/'.$value['cat_id']) ?>" class="btn btn-sm btn-danger">Hapus</a>
+              </td>
+           </tr>
+         <?php endforeach ?>
+       </tbody>
+     </table>
+
+    </main>                             
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

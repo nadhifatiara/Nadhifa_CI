@@ -28,6 +28,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url("index.php/Blog") ?>">Blog</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url("index.php/Category") ?>">Category</a>
+          </li>
         </ul>
       </div>
     </nav>
