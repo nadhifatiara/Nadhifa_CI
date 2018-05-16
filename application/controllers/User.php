@@ -36,7 +36,7 @@ class User extends CI_Controller {
             // Encrypt password
             $enc_password = md5($this->input->post('password'));
 
-            $this->user_model->register($enc_password);
+            $this->User_model->register($enc_password);
 
             // Tampilkan pesan
             $this->session->set_flashdata('user_registered', 'Anda telah teregistrasi.');
