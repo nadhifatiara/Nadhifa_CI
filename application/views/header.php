@@ -28,5 +28,8 @@
             <a class="nav-link" href="<?php echo base_url("index.php/Category") ?>">Category</a>
           </li>
         </ul>
+        <div class="btn-group" role="group" aria-label="Data baru">
+                    <a href="<?php echo base_url("index.php/User/register") ?>" class="btn btn-outline-light">Register</a>
+        </div>
       </div>
     </nav>
