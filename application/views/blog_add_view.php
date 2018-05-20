@@ -6,10 +6,6 @@
           <?php echo  $error ?>
           <?php echo  validation_errors() ?>
           <?php echo form_open_multipart('Blog/add_view');?>
-            <div class="form-group">
-    <label for="id">Id</label>
-    <input type="text" class="form-control" id="id" name="id" placeholder="Id">
-  </div>
   <div class="form-group">
     <label for="author">Author</label>
     <input type="text" class="form-control" id="author" name="author" placeholder="Author">

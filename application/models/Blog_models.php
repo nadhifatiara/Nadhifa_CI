@@ -19,9 +19,9 @@ public function getAll()
          } 
       } 
    
-    public function update($data,$old_id) { 
+    public function update($data,$id) { 
          $this->db->set($data); 
-         $this->db->where("id", $old_id); 
+         $this->db->where("id", $id); 
          $this->db->update("blog", $data); 
       }
 

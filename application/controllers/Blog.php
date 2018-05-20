@@ -13,7 +13,6 @@ class Blog extends CI_Controller {
          $data['error'] = ""; 
       $this->load->helper(array('form', 'url'));
       $this->load->library('form_validation');
-      $this->form_validation->set_rules('id', 'Id', 'required');
       $this->form_validation->set_rules('author', 'Author', 'required');
       $this->form_validation->set_rules('title', 'Title', 'required');
       if ($this->form_validation->run() == FALSE)
@@ -37,8 +36,7 @@ class Blog extends CI_Controller {
 
          else {  
             $dataUpload = $this->upload->data();  
-            $data = array(  
-               'id' => $this->input->post('id'), 
+            $data = array(   
                'author' => $this->input->post('author'), 
                'date' => $this->input->post('date'), 
                'title' => $this->input->post('title'), 
@@ -68,7 +66,6 @@ class Blog extends CI_Controller {
          else { 
             $dataUpload = $this->upload->data(); 
             $data = array( 
-                  'id' => $this->input->post('id'),
                   'author' => $this->input->post('author'),
                   'date' => $this->input->post('date'),
                   'title' => $this->input->post('title'),
@@ -89,7 +86,6 @@ class Blog extends CI_Controller {
       $data['error'] = ""; 
       $this->load->helper(array('form', 'url'));
       $this->load->library('form_validation');
-      $this->form_validation->set_rules('id', 'Id', 'required');
       $this->form_validation->set_rules('author', 'Author', 'required');
       $this->form_validation->set_rules('title', 'Title', 'required');
       $data['records'] = $this->Blog_models->getOne($id);
@@ -114,16 +110,14 @@ class Blog extends CI_Controller {
 
          else {  
             $dataUpload = $this->upload->data();  
-            $data = array(  
-               'id' => $this->input->post('id'), 
+            $data = array(   
                'author' => $this->input->post('author'), 
                'date' => $this->input->post('date'), 
                'title' => $this->input->post('title'), 
                'content' => $this->input->post('content'), 
                'image_file' => $dataUpload['file_name']  
                );  
-            $old_id = $this->input->post('old_id');
-            $this->Blog_models->update($data,$old_id); 
+            $this->Blog_models->update($data,$id); 
             redirect('Blog');  
          } 
       }  
