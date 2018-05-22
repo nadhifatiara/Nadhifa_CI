@@ -1,8 +1,9 @@
-<?php $this->load->view('header') ?>
-
     <main role="main" class="container">
+      <?php if($this->session->userdata('user_loggedin')) : ?>
       <a href="<?php echo base_url("index.php/Blog/add_view") ?>" class="btn btn-primary mb-3">Tambah Blog</a>
-  <?php foreach ($records as $key => $value): ?>
+      <?php endif; ?>
+        <div class="row">
+          <?php foreach ($records as $key => $value): ?>
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="<?php echo base_url() ?>uploads/<?php echo $value['image_file'] ?>" alt="" width="348" height="225">
@@ -20,10 +21,10 @@
                 </div>
               </div>
             </div>
-  <?php endforeach ?>
+          <?php endforeach ?>
+        </div>
         <?php 
         if(isset($links)){
           echo $links;
         } ?>
     </main>
-    <?php $this->load->view('footer') ?>

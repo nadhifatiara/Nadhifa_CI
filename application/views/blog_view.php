@@ -1,5 +1,3 @@
-<?php $this->load->view('header') ?>
-
     <main role="main" class="container">
     <h1 class="text-center"><?php echo $records[0]['title'] ?></h1>
     <h6 class="text-muted">Tanggal : <?php echo  $records[0]['date']  ?></h6>
@@ -12,4 +10,3 @@
           <p><?php echo $records[0]['content'] ?></p>
         </div>
     </main>															
-<?php $this->load->view('footer') ?>

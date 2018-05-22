@@ -1,6 +1,6 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
-$config['per_page'] = 10;
+$config['per_page'] = 9;
 $config['uri_segment'] = 3;
 
 $config['full_tag_open'] = '<nav><ul class="pagination justify-content-center">';

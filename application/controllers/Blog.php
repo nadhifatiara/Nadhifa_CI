@@ -5,19 +5,37 @@ class Blog extends CI_Controller {
 
 	public function index() { 
          
-         $data['records'] = $this->Blog_models->getAll(); 
-         $this->load->view('Blog_list',$data); 
+      $limit_per_page=9;
+      $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+      $total_records= $this->Blog_models->get_total();
+
+      if($total_records > 0 ){
+         $data['records'] = $this->Blog_models->get_all_artikel($limit_per_page,$start_index);
+         $config['base_url'] = base_url().'index.php/blog/pagination';
+         $config['total_rows'] = $total_records;
+         $config['per_page'] = $limit_per_page;
+         $config['uri_segment'] = 3;
+
+         $this->pagination->initialize($config);
+
+         $data['links'] = $this->pagination->create_links();
+      }
+      $this->load->view('header');
+      $this->load->view('Blog_list',$data); 
+      $this->load->view('footer');
       } 
   
-      public function add_view() {
-         $data['error'] = ""; 
+   public function add_view() {
+      $data['error'] = ""; 
       $this->load->helper(array('form', 'url'));
       $this->load->library('form_validation');
       $this->form_validation->set_rules('author', 'Author', 'required');
       $this->form_validation->set_rules('title', 'Title', 'required');
       if ($this->form_validation->run() == FALSE)
       {
+         $this->load->view('header');
          $this->load->view('blog_add_view',$data); 
+         $this->load->view('footer');
       }
       else
       {
@@ -31,7 +49,9 @@ class Blog extends CI_Controller {
 
          if ( ! $this->upload->do_upload('image_file')) { 
             $error = array('error' => $this->upload->display_errors());  
+            $this->load->view('header');
             $this->load->view('blog_add_view', $error);  
+            $this->load->view('footer');
          } 
 
          else {  
@@ -49,7 +69,7 @@ class Blog extends CI_Controller {
       }
       } 
   
-     public function add_action() { 
+   public function add_action() { 
          $config['upload_path']   = './uploads/'; 
          $config['allowed_types'] = 'gif|jpg|png'; 
          $config['max_size']      = 80000; 
@@ -60,7 +80,9 @@ class Blog extends CI_Controller {
          
          if ( ! $this->upload->do_upload('image_file')) {
             $error = array('error' => $this->upload->display_errors()); 
+            $this->load->view('header');
             $this->load->view('blog_add_view', $error); 
+            $this->load->view('footer');
          }
          
          else { 
@@ -77,9 +99,11 @@ class Blog extends CI_Controller {
          }
       }
 
-      public function byId($id){
-  		 $data['records'] = $this->Blog_models->getOne($id); 
-         $this->load->view('blog_view',$data); 
+   public function byId($id){
+  		     $data['records'] = $this->Blog_models->getOne($id); 
+           $this->load->view('header');
+           $this->load->view('blog_view',$data); 
+           $this->load->view('footer');
   	}
 
    public function update_view($id) {
@@ -91,7 +115,9 @@ class Blog extends CI_Controller {
       $data['records'] = $this->Blog_models->getOne($id);
       if ($this->form_validation->run() == FALSE)
       {
+         $this->load->view('header');
          $this->load->view('blog_update_view',$data); 
+         $this->load->view('footer');
       }
       else
       {
@@ -105,7 +131,9 @@ class Blog extends CI_Controller {
 
          if ( ! $this->upload->do_upload('image_file')) { 
             $data['error'] = $this->upload->display_errors();  
+            $this->load->view('header');
             $this->load->view('blog_update_view', $data);  
+            $this->load->view('footer');
          } 
 
          else {  
@@ -128,29 +156,11 @@ class Blog extends CI_Controller {
       redirect('Blog');
    }
 
-   public function pagination() { 
-      $limit_per_page=10;
-      $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-      $total_records= $this->Blog_models->get_total();
-
-      if($total_records > 0 ){
-         $data['records'] = $this->Blog_models->get_all_artikel($limit_per_page,$start_index);
-         $config['base_url'] = base_url().'index.php/blog/pagination';
-         $config['total_rows'] = $total_records;
-         $config['per_page'] = $limit_per_page;
-         $config['uri_segment'] = 3;
-
-         $this->pagination->initialize($config);
-
-         $data['links'] = $this->pagination->create_links();
-      }
-      $this->load->view('Blog_list',$data);
-
-   }
-
    public function dataTable()
    {
       $data['records'] = $this->Blog_models->getAll(); 
+      $this->load->view('header');
       $this->load->view('blog_table',$data);  
+      $this->load->view('footer');
    }
 }

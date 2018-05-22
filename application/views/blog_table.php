@@ -1,4 +1,3 @@
-<?php $this->load->view('header') ?>
   <main role="main" class="container">
     <a href="<?php echo base_url("index.php/Blog/add_view") ?>" class="btn btn-primary mb-3">Tambah Blog</a>
     <table id="dt-basic" class="table table-striped table-bordered">
@@ -34,4 +33,3 @@
     $('#dt-basic').DataTable();
   } );
 </script>
-<?php $this->load->view('footer') ?>

@@ -1,4 +1,3 @@
-<?php $this->load->view('header') ?>
     <main role="main" class="container"> 
     <div class="row"> 
       <div class="col"> 
@@ -31,4 +30,3 @@
       </div> 
   </div> 
   </main>															
-<?php $this->load->view('footer') ?>
