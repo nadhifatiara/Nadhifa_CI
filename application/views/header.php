@@ -19,22 +19,24 @@
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url("index.php/Blog/pagination") ?>">Blog</a>
+            <a class="nav-link" href="<?php echo base_url("index.php/Blog") ?>">Blog</a>
           </li>
           <li class="nav-item">
+            <?php if($this->session->userdata('level') == '1') : ?>
             <a class="nav-link" href="<?php echo base_url("index.php/Blog/datatable") ?>">Blog Datatable</a>
+            <?php endif; ?>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url("index.php/Category") ?>">Category</a>
           </li>
         </ul>
-        <?php if(!$this->session->userdata('user_loggedin')) : ?>
+        <?php if(!$this->session->userdata('logged_in')) : ?>
           <div class="btn-group" role="group" aria-label="Data baru">
         <?php echo anchor('User/login', 'Login', array('class' => 'btn btn-outline-light')); ?>
           </div>
         <?php endif; ?>
 
-        <?php if($this->session->userdata('user_loggedin')) : ?>
+        <?php if($this->session->userdata('logged_in')) : ?>
           <div class="btn-group" role="group" aria-label="Data baru">
         <?php echo anchor('User/logout', 'Logout', array('class' => 'btn btn-outline-light')); ?>
           </div>
