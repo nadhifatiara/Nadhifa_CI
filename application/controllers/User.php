@@ -5,8 +5,7 @@ class User extends CI_Controller {
 
 	public function __construct()
     {
-        parent::__construct();
-                
+        parent::__construct();       
         $this->load->library('form_validation');
         $this->load->model('User_model');
     }
@@ -68,17 +67,17 @@ class User extends CI_Controller {
     		if($user_id){
         	// Buat session
         	$user_data = array(
-            'user_id' => $user_id['user_id'],
+            'user_id' => $user_id,
             'username' => $username,
-            'level' => $user_id['level'],
-            'logged_in' => true
+            'logged_in' => true,
+            'level' => $this->User_model->getLevel($user_id)
         	);
         	$this->session->set_userdata($user_data);
 
         	// Set message
         	$this->session->set_flashdata('user_loggedin', 'You are now logged in');
 
-        	redirect('Blog');
+        	redirect('user/dashboard');
     		} else {
         	// Set message
         	$this->session->set_flashdata('login_failed', 'Login is invalid');
@@ -98,5 +97,22 @@ class User extends CI_Controller {
         $this->session->set_flashdata('user_loggedout', 'You are now log out');
 
         redirect('user/login');
+    }
+
+    public function dashboard(){
+        if(!$this->session->userdata('logged_in')){
+            redirect('user/login');
+        }
+
+        $username = $this->session->userdata('username');
+
+        // Dapatkan detail user
+        $data['user'] = $this->User_model->get_user_details($username);
+
+        // Load dashboard
+        $this->load->view('header');
+        $this->load->view('users/dashboard', $data);
+        $this->load->view('footer');
+
     }
 }
