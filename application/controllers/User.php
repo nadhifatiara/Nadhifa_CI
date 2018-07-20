@@ -10,13 +10,6 @@ class User extends CI_Controller {
         $this->load->model('User_model');
     }
 
-	public function index()
-	{
-		$this->load->view('header');
-		$this->load->view('users/register');
-		$this->load->view('footer');
-	}
-
 	// Register user
     public function register(){
         $data['page_title'] = 'Register';
@@ -76,9 +69,12 @@ class User extends CI_Controller {
 
         	// Set message
         	$this->session->set_flashdata('user_loggedin', 'You are now logged in');
-
-        	redirect('user/dashboard');
-    		} else {
+            if($user_data['level'] == '1'){
+                redirect('admin/Blog');
+            }else{
+                redirect('user/dashboard');
+            }
+    	} else {
         	// Set message
         	$this->session->set_flashdata('login_failed', 'Login is invalid');
 
@@ -92,11 +88,12 @@ class User extends CI_Controller {
         $this->session->unset_userdata('logged_in');
         $this->session->unset_userdata('user_id');
         $this->session->unset_userdata('username');
+        $this->session->unset_userdata('level');
 
         // Set message
         $this->session->set_flashdata('user_loggedout', 'You are now log out');
 
-        redirect('user/login');
+        redirect('User/login');
     }
 
     public function dashboard(){

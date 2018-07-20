@@ -1,9 +1,13 @@
-    <main role="main" class="container"> 
+<?php $this->load->view('admin/header') ?>
+<?php $this->load->view('admin/navbar') ?>
+<?php $this->load->view('admin/menu') ?>
+<main role="main" class="container"> 
+  <h1>Update Blog</h1>
     <div class="row"> 
       <div class="col"> 
         <?php echo  $error ?> 
         <?php echo  validation_errors() ?>
-        <?php echo form_open_multipart('Blog/update_view/'.$records[0]['id']);?>
+        <?php echo form_open_multipart('admin/Blog/update/'.$records[0]['id']);?>
         <div class="form-group"> 
           <label for="author">Author</label> 
           <input type="text" class="form-control" id="author" name="author" value="<?php echo $records[0]['author'] ?>"> 
@@ -29,4 +33,10 @@
       </form> 
       </div> 
   </div> 
-  </main>															
+  </main>	
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+  } );
+</script>
+<?php $this->load->view('admin/footer') ?>														

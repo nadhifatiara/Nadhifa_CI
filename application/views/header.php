@@ -21,14 +21,6 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url("index.php/Blog") ?>">Blog</a>
           </li>
-          <li class="nav-item">
-            <?php if($this->session->userdata('level') == '1') : ?>
-            <a class="nav-link" href="<?php echo base_url("index.php/Blog/datatable") ?>">Blog Datatable</a>
-            <?php endif; ?>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url("index.php/Category") ?>">Category</a>
-          </li>
         </ul>
         <?php if(!$this->session->userdata('logged_in')) : ?>
           <div class="btn-group" role="group" aria-label="Data baru">

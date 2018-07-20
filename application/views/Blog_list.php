@@ -1,5 +1,5 @@
     <main role="main" class="container">
-      <?php if($this->session->userdata('level') == '1') : ?>
+      <?php if($this->session->userdata('logged_in')) : ?>
       <a href="<?php echo base_url("index.php/Blog/add_view") ?>" class="btn btn-primary mb-3">Tambah Blog</a>
       <?php endif; ?>
         <div class="row">
@@ -13,10 +13,6 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a href="<?php echo base_url('index.php/Blog/byId/'.$value['id']) ?>" class="btn btn-sm btn-outline-secondary">View </a>
-                      <?php if ($this->session->userdata('level') == '1'): ?>
-                      <a href="<?php echo base_url('index.php/Blog/update_view/'.$value['id']) ?>" class="btn btn-sm btn-outline-secondary">Edit </a>
-                      <a href="<?php echo base_url('index.php/Blog/delete_action/'.$value['id']) ?>" class="btn btn-outline-danger">Delete</a>
-                      <?php endif ?>
                     </div>
                     <small class="text-muted"><?php echo $value['date'] ?></small>
                   </div>

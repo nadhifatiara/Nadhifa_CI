@@ -1,9 +1,13 @@
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col">
-          <?php echo  $error ?>
-          <?php echo  validation_errors() ?>
-          <?php echo form_open_multipart('Blog/add_view');?>
+<?php $this->load->view('admin/header') ?>
+<?php $this->load->view('admin/navbar') ?>
+<?php $this->load->view('admin/menu') ?>
+<main role="main" class="container" style="margin-top: 5rem;">
+  <h1>Tambah Blog</h1>
+  <div class="row">
+  <div class="col">
+      <?php echo  $error ?>
+      <?php echo  validation_errors() ?>
+      <?php echo form_open_multipart('');?>
   <div class="form-group">
     <label for="author">Author</label>
     <input type="text" class="form-control" id="author" name="author" placeholder="Author">
@@ -28,4 +32,10 @@
           </form>
         </div>
       </div>
-    </main>															
+</main>					
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+  } );
+</script>
+<?php $this->load->view('admin/footer') ?>										

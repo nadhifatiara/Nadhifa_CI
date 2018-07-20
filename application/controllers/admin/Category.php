@@ -13,7 +13,13 @@ class Category extends CI_Controller{
 		$this->load->model('Category_model');
 	}
 
-	public function create() 
+	public function index()
+	{
+		$data['getData'] = $this->Category_model->getData();
+		$this->load->view('admin/category/category.php',$data);
+	}
+
+	public function tambah() 
 	{
 		// Judul Halaman
 		$data['page_title'] = 'Buat Kategori Baru';
@@ -30,17 +36,11 @@ class Category extends CI_Controller{
 		);
 
 		if($this->form_validation->run() === FALSE){
-			$this->load->view('cat_create', $data);
+			$this->load->view('admin/category/tambah', $data);
 		} else {
-			$this->Category_model->create_category();
-			redirect('category');
+			$this->Category_model->tambah();
+			redirect('admin/Category');
 		}
-	}
-
-	public function index()
-	{
-		$data['cat_read'] = $this->Category_model->read_category();
-		$this->load->view('cat_read',$data);
 	}
 
 	public function update($id)
@@ -52,26 +52,27 @@ class Category extends CI_Controller{
 		$this->form_validation->set_rules(
 			'cat_name',
 			'Nama Kategori',
-			'required|is_unique[categories.cat_name]',
+			'required|is_unique[category.cat_name]',
 			array(
 				'required' => 'Isi %s donk, males amat.',
 				'is_unique' => 'Judul <strong>' . $this->input->post('cat_name') . '</strong> sudah ada bosque.'
 			)
 		);
-		$data['cat_update'] = $this->Category_model->read_category($id)[0];
+		$data['update'] = $this->Category_model->getData($id)[0];
 		if($this->form_validation->run() === FALSE){
 	
-			$this->load->view('cat_update', $data);
+			$this->load->view('admin/category/update', $data);
 		
 		} 
 		else {
-			$this->Category_model->update_category($id);
-			redirect('category');
+			$set = $this->input->post();
+			$this->Category_model->update($set,$id);
+			redirect('admin/Category');
 		}
 	}
 	public function delete($id)
 	{
-		$this->Category_model->delete_category($id);
-		redirect('category');
+		$this->Category_model->delete($id);
+		redirect('admin/Category');
 	}
 }
